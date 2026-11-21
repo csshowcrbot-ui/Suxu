@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #FAF8F5;
+    color: #2C2A29;
+    font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+    letter-spacing: 0.03em;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, .font-serif-jp {
+    font-family: 'Noto Serif TC', 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: 0.06em;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* 日式極細線條與和紙質感陰影 */
+.jp-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E6E0D6;
+  border-radius: 6px;
+  box-shadow: 0 2px 14px -4px rgba(44, 42, 41, 0.035);
+}
+
+.jp-subcard {
+  background-color: #FAF8F5;
+  border: 1px solid #EAE4DA;
+  border-radius: 4px;
+}

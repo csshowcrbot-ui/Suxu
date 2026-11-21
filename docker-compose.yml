@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: suxu-postgres
+    environment:
+      POSTGRES_USER: lightclinic
+      POSTGRES_PASSWORD: lightclinic_secret
+      POSTGRES_DB: lightclinic_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: suxu-redis
+    ports:
+      - '6379:6379'
+    command: redis-server --appendonly yes
+
+  app:
+    build: .
+    container_name: suxu-web-api
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: postgresql://lightclinic:lightclinic_secret@postgres:5432/lightclinic_db
+      REDIS_URL: redis://redis:6379
+      NEXT_PUBLIC_LIFF_ID: 2006881234-LightClinic
+    depends_on:
+      - postgres
+      - redis
+
+volumes:
+  pgdata:
+
